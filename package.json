@@ -1,8 +1,8 @@
 {
-    "name":                 "mingle",
+    "name":                 "perhaps",
     "description":          "A bloom filter with pluggable hashing designed for serialization.",
     "author":               "Alan Gutierrez <alan@prettyrobots.com>",
-    "version":              "0.0.0",
+    "version":              "0.0.1",
     "keywords":
     [
                             "bloom filter", "serialization", "database"
