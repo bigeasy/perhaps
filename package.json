@@ -2,7 +2,7 @@
     "name":                 "mingle",
     "description":          "A bloom filter with pluggable hashing designed for serialization.",
     "author":               "Alan Gutierrez <alan@prettyrobots.com>",
-    "version":              "9.9.9",
+    "version":              "0.0.0",
     "keywords":
     [
                             "bloom filter", "serialization", "database"
