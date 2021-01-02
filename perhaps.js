@@ -13,6 +13,10 @@ class Future {
         this._reject = null
     }
 
+    get vivified () {
+        return this._promise != null
+    }
+
     get promise () {
         if (this._promise != null) {
             return this._promise

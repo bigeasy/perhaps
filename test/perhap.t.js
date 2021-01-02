@@ -1,13 +1,15 @@
-require('proof')(11, async (okay) => {
+require('proof')(13, async (okay) => {
     const Future = require('..')
     {
         const future = new Future
         okay(!future.fulfilled, 'not fulfilled')
+        okay(!future.vivified, 'no one wants the promise')
         future.resolve()
         future.resolve(1)
         future.reject(new Error('reject'))
         okay(future.fulfilled, 'fulfilled')
         const result = await future.promise
+        okay(future.vivified, 'someone wanted the promise')
         okay(result === undefined, 'resolve empty value')
         okay(future.resolution === undefined, 'empty resolution value')
     }
