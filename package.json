@@ -1,28 +1,33 @@
 {
     "name":                 "perhaps",
-    "description":          "A bloom filter with pluggable hashing designed for serialization.",
-    "author":               "Alan Gutierrez <alan@prettyrobots.com>",
-    "version":              "0.0.1",
+    "version":              "0.1.0",
+    "description":
+
+      "A future wrapper around a Promise.",
+
     "keywords":
     [
-                            "bloom filter", "serialization", "database"
+                            "async", "await", "events", "callbacks"
     ],
+    "author":               "Alan Gutierrez <alan@prettyrobots.com>",
+    "homepage":             "https://bigeasy.github.io/perhaps",
+    "bugs":                 "https://github.com/bigeasy/perhaps/issues",
     "license":              "MIT",
-    "homepage":             "https://github.com/bigeasy/perhaps",
     "repository":
     {
-                            "url": "git://github.com/bigeasy/perhaps.git",
-                            "type": "git"
+                            "type": "git",
+                            "url": "bigeasy/perhaps"
     },
-    "main":                 "perhaps.js",
     "dependencies":
-    {},
+    {
+    },
     "devDependencies":
     {
-                            "proof": "1.x"
+                            "proof":                        "^9.0.3"
     },
+    "main":                 "perhaps",
     "scripts":
     {
-                            "test": "proof platform win32 && proof */*/*.t.js || t/test"
+                            "test": "proof test/*.t.js"
     }
 }
