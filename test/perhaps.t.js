@@ -11,7 +11,7 @@ require('proof')(13, async (okay) => {
         const result = await future.promise
         okay(future.vivified, 'someone wanted the promise')
         okay(result === undefined, 'resolve empty value')
-        okay(future.resolution === undefined, 'empty resolution value')
+        okay(future.resolution,  [], 'empty resolution value')
     }
     {
         const test = []
@@ -30,7 +30,7 @@ require('proof')(13, async (okay) => {
         future.resolve(1)
         const result = await future.promise
         okay(result, 1, 'resolve error-first callback')
-        okay(future.resolution, 1, 'resolution value')
+        okay(future.resolution, [ 1 ], 'resolution value')
         okay(await future.promise, 1, 'reuse promise')
     }
     {

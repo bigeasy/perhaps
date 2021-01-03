@@ -7,7 +7,7 @@ class Future {
     constructor () {
         this.fulfilled = false
         this.rejection = null
-        this.resolution
+        this.resolution = null
         this._promise = null
         this._resolve = null
         this._reject = null
@@ -30,15 +30,15 @@ class Future {
         if (this.rejection != null) {
             return this._promise = Promise.reject(this.rejection)
         }
-        return this._promise = Promise.resolve(this.resolution)
+        return this._promise = Promise.resolve.apply(Promise, this.resolution)
     }
 
-    resolve (value) {
+    resolve (...vargs) {
         if (!this.fulfilled) {
             this.fulfilled = true
-            this.resolution = value
+            this.resolution = vargs
             if (this._resolve != null) {
-                this._resolve.call(null, value)
+                this._resolve.apply(null, vargs)
             }
         }
     }
