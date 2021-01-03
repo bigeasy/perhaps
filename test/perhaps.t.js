@@ -35,9 +35,10 @@ require('proof')(13, async (okay) => {
     }
     {
         const future = new Future
-        const promise = future.promise
+        const promises = [ future.promise, future.promise ]
         future.resolve(1)
-        const result = await promise
+        const result = await promises.shift()
+        await promises.shift()
         okay(result, 1, 'awaited value')
     }
     {

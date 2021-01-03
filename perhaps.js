@@ -22,7 +22,7 @@ class Future {
             return this._promise
         }
         if (!this.fulfilled) {
-            return new Promise((resolve, reject) => {
+            return this._promise = new Promise((resolve, reject) => {
                 this._resolve = resolve
                 this._reject = reject
             })
