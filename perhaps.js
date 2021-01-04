@@ -4,10 +4,10 @@
 
 //
 class Future {
-    constructor () {
-        this.fulfilled = false
-        this.rejection = null
-        this.resolution = null
+    constructor ({ resolution = null, rejection = null } = {}) {
+        this.fulfilled = resolution != null || rejection != null
+        this.resolution = resolution
+        this.rejection = rejection
         this._promise = null
         this._resolve = null
         this._reject = null

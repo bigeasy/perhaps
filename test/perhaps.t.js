@@ -1,4 +1,4 @@
-require('proof')(13, async (okay) => {
+require('proof')(16, async (okay) => {
     const Future = require('..')
     {
         const future = new Future
@@ -52,5 +52,26 @@ require('proof')(13, async (okay) => {
             test.push(error.message)
         }
         okay(test, [ 'reject' ], 'awaited rejection')
+    }
+    {
+        const future = new Future({ resolution: [ 1 ] })
+        okay({
+            fulfilled: future.fulfilled,
+            resolve: await future.promise
+        }, {
+            fulfilled: true,
+            resolve: 1
+        }, 'constructed with resolution')
+    }
+    {
+        const future = new Future({ rejection: new Error('reject') })
+        const errors = []
+        okay(future.fulfilled, 'constructed fulfilled rejected')
+        try {
+            await future.promise
+        } catch (error) {
+            errors.push(error.message)
+        }
+        okay(errors, [ 'reject' ], 'constructed fulfilled rejected thrown')
     }
 })
