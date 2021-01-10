@@ -25,6 +25,7 @@ class Future {
             future.reject(error)
             callback(future)
         })
+        return future
     }
 
     constructor () {
