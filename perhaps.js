@@ -4,10 +4,33 @@
 
 //
 class Future {
-    constructor ({ resolution = null, rejection = null } = {}) {
-        this.fulfilled = resolution != null || rejection != null
-        this.resolution = resolution
-        this.rejection = rejection
+    static resolve (...vargs) {
+        const future = new Future
+        future.resolve.apply(future, vargs)
+        return future
+    }
+
+    static reject (error) {
+        const future = new Future
+        future.reject(error)
+        return future
+    }
+
+    static capture (promise, callback) {
+        const future = new Future
+        promise.then((...vargs) => {
+            future.resolve.apply(future, vargs)
+            callback(future)
+        }, error => {
+            future.reject(error)
+            callback(future)
+        })
+    }
+
+    constructor () {
+        this.fulfilled = false
+        this.resolution = null
+        this.rejection = null
         this._promise = null
         this._resolve = null
         this._reject = null

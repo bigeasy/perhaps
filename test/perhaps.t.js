@@ -1,4 +1,4 @@
-require('proof')(16, async (okay) => {
+require('proof')(22, async (okay) => {
     const Future = require('..')
     {
         const future = new Future
@@ -54,7 +54,7 @@ require('proof')(16, async (okay) => {
         okay(test, [ 'reject' ], 'awaited rejection')
     }
     {
-        const future = new Future({ resolution: [ 1 ] })
+        const future = Future.resolve(1)
         okay({
             fulfilled: future.fulfilled,
             resolve: await future.promise
@@ -64,7 +64,7 @@ require('proof')(16, async (okay) => {
         }, 'constructed with resolution')
     }
     {
-        const future = new Future({ rejection: new Error('reject') })
+        const future = Future.reject(new Error('reject'))
         const errors = []
         okay(future.fulfilled, 'constructed fulfilled rejected')
         try {
@@ -73,5 +73,17 @@ require('proof')(16, async (okay) => {
             errors.push(error.message)
         }
         okay(errors, [ 'reject' ], 'constructed fulfilled rejected thrown')
+    }
+    {
+        Future.capture(Promise.resolve(true), future => {
+            okay(future.fulfilled, 'capture future fulfilled')
+            okay(! future.vivified, 'capture future not vivified')
+            okay(future.resolution, [ true ], 'future resolved')
+        })
+        Future.capture(Promise.reject(new Error('reject')), future => {
+            okay(future.fulfilled, 'capture future fulfilled')
+            okay(! future.vivified, 'capture future not vivified')
+            okay(future.rejection.message, 'reject', 'future rejected')
+        })
     }
 })
