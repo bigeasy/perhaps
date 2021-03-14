@@ -57,18 +57,26 @@ class Future {
         return this._promise = Promise.resolve.apply(Promise, this.resolution)
     }
 
+    then (resolve, reject) {
+        this.promise.then(resolve, reject)
+    }
+
     resolve (...vargs) {
-        if (!this.fulfilled) {
-            this.fulfilled = true
-            this.resolution = vargs
-            if (this._resolve != null) {
-                this._resolve.apply(null, vargs)
+        if (! this.fulfilled) {
+            if (vargs.length != 0 && typeof vargs.then == 'function') {
+                vargs.then(result => this.resolve(result), error => this.reject(error))
+            } else {
+                this.fulfilled = true
+                this.resolution = vargs
+                if (this._resolve != null) {
+                    this._resolve.apply(null, vargs)
+                }
             }
         }
     }
 
     reject (error) {
-        if (!this.fulfilled) {
+        if (! this.fulfilled) {
             this.fulfilled = true
             this.rejection = error
             if (this._reject != null) {

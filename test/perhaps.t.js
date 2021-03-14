@@ -1,4 +1,4 @@
-require('proof')(23, async (okay) => {
+require('proof')(26, async (okay) => {
     const Future = require('..')
     {
         const future = new Future
@@ -91,5 +91,26 @@ require('proof')(23, async (okay) => {
             okay(! future.vivified, 'capture future not vivified')
             okay(future.rejection.message, 'reject', 'future rejected')
         })
+    }
+    {
+        const future = new Future()
+        future.resolve(Promise.resolve(1))
+        okay(await future.promise, 1, 'resolve promise')
+    }
+    {
+        const future = new Future()
+        future.resolve(Promise.reject(new Error('rejected')))
+        const errors = []
+        try {
+            await future.promise
+        } catch (error) {
+            errors.push(error.message)
+        }
+        okay(errors, [ 'rejected' ], 'rejected promise')
+    }
+    {
+        const future = new Future()
+        future.resolve(1)
+        okay(await future, 1, 'thenable')
     }
 })
