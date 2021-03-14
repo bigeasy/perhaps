@@ -1,4 +1,4 @@
-require('proof')(22, async (okay) => {
+require('proof')(23, async (okay) => {
     const Future = require('..')
     {
         const future = new Future
@@ -73,6 +73,12 @@ require('proof')(22, async (okay) => {
             errors.push(error.message)
         }
         okay(errors, [ 'reject' ], 'constructed fulfilled rejected thrown')
+    }
+    {
+        const future = new Future
+        future.reject(new Error)
+        await future.promise.catch(() => {})
+        okay('swallow error')
     }
     {
         Future.capture(Promise.resolve(true), future => {
