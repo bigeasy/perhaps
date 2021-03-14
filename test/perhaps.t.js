@@ -1,4 +1,4 @@
-require('proof')(26, async (okay) => {
+require('proof')(27, async (okay) => {
     const Future = require('..')
     {
         const future = new Future
@@ -112,5 +112,8 @@ require('proof')(26, async (okay) => {
         const future = new Future()
         future.resolve(1)
         okay(await future, 1, 'thenable')
+    }
+    {
+        okay(await new Future(Promise.resolve(1)), 1, 'construct resolved promise')
     }
 })

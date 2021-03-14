@@ -35,6 +35,9 @@ class Future {
         this._promise = null
         this._resolve = null
         this._reject = null
+        if (arguments.length == 1) {
+            this.resolve(arguments[0])
+        }
     }
 
     get vivified () {
