@@ -66,7 +66,7 @@ class Future {
 
     resolve (...vargs) {
         if (! this.fulfilled) {
-            if (vargs.length != 0 && typeof vargs[0].then == 'function') {
+            if (vargs.length != 0 && typeof vargs[0] == 'object' && vargs[0] != null && typeof vargs[0].then == 'function') {
                 vargs[0].then(result => this.resolve(result), error => this.reject(error))
             } else {
                 this.fulfilled = true
