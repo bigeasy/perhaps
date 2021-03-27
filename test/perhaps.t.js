@@ -1,5 +1,5 @@
 require('proof')(28, async (okay) => {
-    const Future = require('..')
+    const { Future } = require('..')
     {
         const future = new Future
         okay(!future.fulfilled, 'not fulfilled')

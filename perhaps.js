@@ -89,4 +89,4 @@ class Future {
     }
 }
 
-module.exports = Future
+exports.Future = Future
