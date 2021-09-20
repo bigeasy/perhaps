@@ -14,7 +14,9 @@ A future wrapper around a Promise.
 | Coverage:     | https://codecov.io/gh/bigeasy/perhaps         |
 | License:      | MIT                                           |
 
+
 ```
+//{ "mode": "text" }
 npm install perhaps
 ```
 
@@ -25,7 +27,15 @@ deal with the fact that JavaScript truthiness will treat `''` and `0` as true so
 the `||` operator can't always be used to create given or default one-liner.
 
 ```javascript
-const { Future } = require('perhaps')
+//{ "mode": "code" }
+(function () {
+    //{ "include": "overview" }
+}) ()
+```
+
+```javascript
+//{ "name": "overview", "code": { "require": "'..'" }, "text": { "require": "'perhaps'" } }
+const { Future } = require(%(require)s)
 ```
 
 We use the name "perhaps" on NPM because we want the first extant argument.
@@ -38,18 +48,26 @@ Proof `okay` function to assert out statements in the readme. A Proof unit test
 generally looks like this.
 
 ```javascript
-require('proof')(4, async okay => {
-    okay('always okay')
-    okay(true, 'okay if true')
-    okay(1, 1, 'okay if equal')
-    okay({ value: 1 }, { value: 1 }, 'okay if deep strict equal')
+//{ "code": { "tests": 1 }, "text": { "tests": 4  } }
+require('proof')(%(tests)d, async okay => {
+    //{ "include": "test", "mode": "code" }
+    //{ "include": "proof" }
 })
+```
+
+```javascript
+//{ "name": "proof", "mode": "text" }
+okay('always okay')
+okay(true, 'okay if true')
+okay(1, 1, 'okay if equal')
+okay({ value: 1 }, { value: 1 }, 'okay if deep strict equal')
 ```
 
 You can run this unit test yourself to see the output from the various
 code sections of the readme.
 
 ```text
+//{ "mode": "text" }
 git clone git@github.com:bigeasy/perhaps.git
 cd perhaps
 npm install --no-package-lock --no-save
@@ -61,7 +79,8 @@ node test/readme.t.js
 The `'extant'` module exports a single `coalesce` function.
 
 ```javascript
-const { Future } = require('perhaps')
+//{ "name": "test", "code": { "require": "'..'" }, "text": { "require": "'perhaps'" } }
+const { Future } = require(%(require)s)
 ```
 
 Note that Extant is SQL's `COALESCE`. It returns the first non-null-like value,
@@ -69,5 +88,6 @@ that is the first value that is not `== null`, which would be `null` or
 `undefined`. If there is no such argument it returns `null`.
 
 ```javascript
+//{ "name": "test" }
 okay('test')
 ```
